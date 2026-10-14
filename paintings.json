@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "peacock",
+    "title": "Peacock",
+    "image": "assets/peacock.jpg",
+    "video": "assets/peacock.mp4",
+    "aspect": 1.0153
+  },
+  {
+    "slug": "lotus",
+    "title": "Lotus",
+    "image": "assets/lotus.jpg",
+    "video": "assets/lotus.mp4",
+    "aspect": 1.7781
+  }
+]

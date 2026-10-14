@@ -6,35 +6,33 @@
   <title>Art Lens</title>
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-  <style>
-    body { margin: 0; }
-  </style>
+  <style>body { margin: 0; }</style>
 </head>
 <body>
   <a-scene
-    mindar-image="imageTargetSrc: ./assets/targets.mind; autoStart: true;"
+    mindar-image="imageTargetSrc: ./assets/targets1.mind; autoStart: true;"
     color-space="sRGB"
     renderer="colorManagement: true, physicallyCorrectLights"
     vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false">
-
     <a-assets>
-      <video id="paintingVideo" src="./assets/Kalamkari_peacock.mp4"
-             preload="auto" loop="true" playsinline webkit-playsinline muted></video>
+      <video id="v-peacock" src="./assets/peacock.mp4" preload="auto" loop="true" playsinline webkit-playsinline muted></video>
+      <video id="v-lotus" src="./assets/lotus.mp4" preload="auto" loop="true" playsinline webkit-playsinline muted></video>
     </a-assets>
-
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-    <a-entity mindar-image-target="targetIndex: 0" id="target">
-      <a-video src="#paintingVideo" width="1" height="1" position="0 0 0"></a-video>
+    <a-entity class="painting" mindar-image-target="targetIndex: 0" data-video="v-peacock">
+      <a-video src="#v-peacock" width="1" height="1.0153" position="0 0 0"></a-video>
+    </a-entity>
+    <a-entity class="painting" mindar-image-target="targetIndex: 1" data-video="v-lotus">
+      <a-video src="#v-lotus" width="1" height="1.7781" position="0 0 0"></a-video>
     </a-entity>
   </a-scene>
-
   <script>
-    const video = document.querySelector("#paintingVideo");
-    const target = document.querySelector("#target");
-    target.addEventListener("targetFound", () => video.play());
-    target.addEventListener("targetLost", () => video.pause());
+    document.querySelectorAll(".painting").forEach(function (t) {
+      var v = document.getElementById(t.dataset.video);
+      t.addEventListener("targetFound", function () { v.play(); });
+      t.addEventListener("targetLost", function () { v.pause(); });
+    });
   </script>
 </body>
 </html>
